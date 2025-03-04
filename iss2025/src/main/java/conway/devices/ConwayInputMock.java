@@ -14,13 +14,15 @@ public class ConwayInputMock {
 
     public void simulateUserControl(){
 		//USER CONTROL HERE ...
-        life.getGrid().getCell( 1, 0 ).switchCellState();;
-		life.getGrid().getCell( 1, 1 ).switchCellState();;
-		life.getGrid().getCell( 1, 2 ).switchCellState();;		
+        life.getGrid().getCell( 0, 0 ).switchCellState();
+		life.getGrid().getCell( 1, 1 ).switchCellState();
+		life.getGrid().getCell( 2, 2 ).switchCellState();
+		life.getGrid().getCell( 0, 2 ).switchCellState();
+		life.getGrid().getCell( 2, 0 ).switchCellState();
 //		System.out.println("---------Initial----------");
 //		outdev.displayGrid();
 //		play(); 		   	
-		control.start();
+		control.start(life);
     }
 
 }

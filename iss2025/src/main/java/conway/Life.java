@@ -13,10 +13,8 @@ public class Life {
     private Grid nextGrid;
  
     public Life(int dimension) {
-    	grid.setDimension(dimension);
-        grid.createGrid();
-        nextGrid.setDimension(dimension);
-        nextGrid.createGrid();
+    	this.grid = new Grid(dimension);
+    	this.nextGrid = new Grid(dimension);
     }
 
     public Grid getGrid(){
@@ -33,32 +31,33 @@ public class Life {
 
     protected void computeNextGen( IOutDev outdev ) {
     	int dim = grid.getDimension();
-    	int numState;
+    	String numState;
         for (int i = 0; i < dim; i++) {
             for (int j = 0; j < dim; j++) {
                 int n = grid.countNeighborsLive(i,j);
                 applyRules(i, j, n);
-                if(grid.getCell(i, j).getState())
-                	numState = 1;
+                if(grid.getCell(i, j).getState() == true)
+                	numState = "1";
                 else
-                	numState = 0;
+                	numState = "0";
                 outdev.displayCell( ""+numState );
             }
             outdev.displayCell("\n");  //Va tolta nel caso della GUI?
         }
-        copyAndResetGrid( outdev );
+        copyAndResetGrid();
         outdev.displayCell("\n");
     }
 
-    protected void copyAndResetGrid( IOutDev outdev ) {
+    protected void copyAndResetGrid() {
     	int dim = grid.getDimension();
         for (int i = 0; i < dim; i++) {
             for (int j = 0; j < dim; j++) {
                 grid.getCell(i, j).setState(nextGrid.getCell(i, j).getState());
                 //outdev.displayCell( ""+grid[i][j] );
-                nextGrid.getCell(i, j).setState(false);
+                //nextGrid.getCell(i, j).setState(false);
             }
         }
+        nextGrid.resetGrid();
     }
 
     protected void applyRules(int row, int col, int numNeighbors) {
@@ -74,7 +73,7 @@ public class Life {
             }
         }
         //CELLA MORTA
-        else if (!nextGrid.getCell(row, col).getState()) {
+        else if (!grid.getCell(row, col).getState()) {
             if (numNeighbors == 3) { //riproduzione
             	nextGrid.getCell(row, col).setState(true);
             }

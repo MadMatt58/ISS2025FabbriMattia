@@ -19,7 +19,8 @@ public class LifeController {
     }
     
     //Called by ConwayInputMock
-    public void start(){
+    public void start(Life life){
+    	this.life = life;
 		System.out.println("---------Initial----------");
 		//La griglia è visualizzata con un ciclo
 		displayGrid();
@@ -42,12 +43,16 @@ public class LifeController {
     }
 
 	public void displayGrid() {
-		for (int i = 0; i < life.getGrid().getDimension(); i++) {
-			for (int j = 0; j < life.getGrid().getDimension(); j++) {
-				if (!life.getGrid().getCell(i, j).getState()) {
-					outdev.displayCell("0");
-                } else {
-                	outdev.displayCell("1");
+		int dim = life.getGrid().getDimension();
+		boolean state;
+		for (int i = 0; i < dim; i++) {
+			for (int j = 0; j < dim; j++) {
+				state = life.getGrid().getCell(i, j).getState();
+				if (state) {
+					outdev.displayCell("1");
+                } 
+				else {
+                	outdev.displayCell("0");
                 }				 
 			}
 			outdev.displayCell("\n");

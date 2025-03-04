@@ -26,7 +26,12 @@ public class Grid {
 	}
 	
 	public void createGrid() {
-		this.grid = new Cell[dimension][dimension];
+		grid = new Cell[dimension][dimension];
+		for(int i = 0; i < dimension; i++) {
+			for (int j = 0; j < dimension; j++) {
+				grid[i][j] = new Cell(false);
+			}
+		}
 	}
 	
 	public void resetGrid() {
@@ -45,13 +50,13 @@ public class Grid {
         if (row-1 >= 0 && col-1 >= 0) {
             if (grid[row-1][col-1].getState()) count++;
         }
-        if (row-1 >= 0 && col+1 < this.dimension) {
+        if (row-1 >= 0 && col+1 < dimension) {
             if (grid[row-1][col+1].getState()) count++;
         }
         if (col-1 >= 0) {
             if (grid[row][col-1].getState()) count++;
         }
-        if (col+1 < this.dimension) {
+        if (col+1 < dimension) {
             if (grid[row][col+1].getState()) count++;
         }
         if (row+1 < dimension) {

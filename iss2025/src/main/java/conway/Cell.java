@@ -3,8 +3,8 @@ package conway;
 public class Cell {
 	private boolean state;
 	
-	public Cell() {
-		this.state = false;
+	public Cell(boolean state) {
+		this.state = state;
 	}
 
 	public boolean getState() {
@@ -16,6 +16,9 @@ public class Cell {
 	}
 	
 	public void switchCellState() {
-		this.state = !state;
+		if(!state)
+			state = true;
+		else
+			state = false;
 	}
 }
